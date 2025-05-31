@@ -1,0 +1,260 @@
+/* --- Global --- */
+body {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: fixed;
+  text-align: center;
+  padding: 50px;
+  margin: 0;
+  overflow-x: hidden;
+  color: #222;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+/* Judul Gambar */
+#judul-gambar {
+  max-width: 25%;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+  margin-bottom: 10px;
+}
+
+/* Efek animasi mengambang */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff4cc;
+  border: 4px dashed #ff9900;
+  border-radius: 20px;
+  box-shadow: 4px 6px 12px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Soal */
+.soal-box {
+  border: 3px solid #ffa500;
+  background-color: #fffbe6;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.08);
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.soal {
+  font-size: 20px;
+  color: #1e3d59;
+}
+
+.soal-gambar {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  display: block;
+}
+
+
+/* Pilihan jawaban */
+.pilihan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pilihan button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ffcc00;
+  color: #333;
+  border: 3px solid #ffa500;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 1px 3px 8px rgba(0,0,0,0.15);
+  min-width: 100px;
+}
+
+.pilihan button:hover {
+  background-color: #ffd633;
+  transform: scale(1.05);
+}
+
+/* Hasil */
+#hasil {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2e8b57;
+  margin: 5px;
+  min-height: 24px;
+}
+
+/* Selesai */
+#selesai {
+  display: none;
+  font-size: 20px;
+  margin-top: 10px;
+  color: #155724;
+  font-weight: bold;
+  background: linear-gradient(135deg, #d4edda, #a8e6cf);
+  padding: 20px;
+  border-radius: 20px;
+  border: 4px solid #28a745;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 0 auto;
+  animation: munculSkor 0.8s ease-in-out;
+}
+
+#selesai ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+#selesai li {
+  background-color: #fff;
+  border-left: 5px solid #28a745;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+#selesai li:hover {
+  transform: scale(1.02);
+}
+
+#selesai li span {
+  font-weight: bold;
+}
+
+#selesai li .benar {
+  color: green;
+}
+
+#selesai li .salah {
+  color: red;
+}
+
+/* Tombol Ulang */
+.tombol-ulang {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #ffcc00;
+  color: #333;
+  border: 3px solid #ffa500;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 1px 3px 8px rgba(0,0,0,0.15);
+  min-width: 140px;
+}
+
+.tombol-ulang:hover {
+  background-color: #ffa500;
+  transform: scale(1.05);
+}
+
+/* Animasi skor muncul */
+@keyframes munculSkor {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive Android */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 10px;
+    font-size: 14px;
+  }
+
+  #judul-gambar {
+    max-width: 50%;
+    margin-bottom: 15px;
+  }
+
+  .container {
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 15px;
+    border-width: 3px;
+    border-radius: 15px;
+  }
+
+  .soal-box {
+    padding: 12px 10px;
+    border-width: 2px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+
+  .soal {
+    font-size: 18px;
+  }
+
+    .soal-gambar {
+    max-width: 100%;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+  }
+
+  .pilihan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  .pilihan button {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 0;
+    font-size: 16px;
+  }
+
+  #hasil {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+
+  #selesai {
+    max-width: 100%;
+    padding: 15px;
+    font-size: 18px;
+  }
+
+  #selesai ol {
+    padding-left: 15px;
+  }
+
+  #selesai li {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .tombol-ulang {
+    min-width: 120px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

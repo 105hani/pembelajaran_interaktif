@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/judul.PNG" />
+  <title>Kuis Matematika</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <audio id="klik-audio" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+  <img id="judul-gambar" src="images/judul.PNG" alt="Kuis Matematika">
+
+  <div class="container">
+    <div id="kuis">
+      <div class="soal-box">
+        <div class="soal" id="soal"></div>
+        <div id="gambar"></div>
+      </div>
+      <div class="pilihan" id="pilihan"></div>
+      <p id="hasil"></p>
+    </div>
+    <div id="selesai"></div>
+  </div>
+
+  <script>
+    const klikAudio = document.getElementById("klik-audio");
+
+      const semuaSoal = [
+      { pertanyaan: "1/2 + 1/4 = ?", pilihan: ["1/4", "3/4", "2/3", "2/4"], jawaban: "3/4" },
+      { pertanyaan: "Bangun datar dengan 4 sisi sama panjang adalah...", pilihan: ["Persegi", "Segitiga", "Lingkaran", "Balok"], jawaban: "Persegi" },
+      { pertanyaan: "500 - 125 = ?", pilihan: ["375", "425", "400", "300"], jawaban: "375" },
+      { pertanyaan: "1.000 + 250 = ?", pilihan: ["1.150", "1.250", "1.200", "1.400"], jawaban: "1.250" },
+      { pertanyaan: "Sisi tegak pada prisma segitiga berjumlah...", pilihan: ["3", "4", "5", "6"], jawaban: "3" },
+      { pertanyaan: "1/3 + 1/3 = ?", pilihan: ["2/3", "1/2", "1/6", "3/3"], jawaban: "2/3" },
+      { pertanyaan: "Satuan panjang yang lebih kecil dari meter adalah...", pilihan: ["Desimeter", "Kilometer", "Hektometer", "Mesitometer"], jawaban: "Desimeter" },
+      { pertanyaan: "Sudut pada persegi berjumlah...", pilihan: ["4", "2", "3", "5"], jawaban: "4" },
+      { pertanyaan: "10 x 10 = ?", pilihan: ["100", "10", "20", "30"], jawaban: "100" },
+      { pertanyaan: "Luas persegi dengan sisi 5 cm adalah...", pilihan: ["25 cm²", "10 cm²", "20 cm²"], jawaban: "25 cm²" },
+      { pertanyaan: "Keliling persegi panjang 4 x 6 cm = ?", pilihan: ["20 cm", "24 cm", "18 cm", "28 cm"], jawaban: "20 cm" },
+      { pertanyaan: "3/4 - 1/4 = ?", pilihan: ["1/2", "2/4", "3/4", "1/4"], jawaban: "1/2" },
+      { pertanyaan: "180 : 6 = ?", pilihan: ["30", "20", "25", "29"], jawaban: "30" },
+      { pertanyaan: "Sudut siku-siku besarnya...", pilihan: ["90°", "45°", "180°", "150°"], jawaban: "90°" },
+      { pertanyaan: "3 x 8 = ?", pilihan: ["24", "21", "18", "14"], jawaban: "24" },
+      { pertanyaan: "Angka satuan dari 123 adalah...", pilihan: ["3", "2", "1", "4"], jawaban: "3" },
+      { pertanyaan: "Berapakah hasil 144 : 12?", pilihan: ["12", "10", "14", "19"], jawaban: "12" },
+      { pertanyaan: "Bilangan ganjil setelah 27 adalah...", pilihan: ["29", "30", "28", "40"], jawaban: "29" },
+      { pertanyaan: "Angka 7 pada bilangan 375 menempati posisi...", pilihan: ["Puluhan", "Ratusan", "Satuan", "ribuan"], jawaban: "Puluhan" },
+      { pertanyaan: "Bangun ruang dengan alas dan tutup berbentuk lingkaran adalah...", pilihan: ["Tabung", "Kubus", "Bola", "balok"], jawaban: "Tabung" },
+      { pertanyaan: "Berapakah volume kubus dengan panjang sisi 8 cm?", pilihan: ["64 cm³", "128 cm³", "256 cm³", "512 cm³"], jawaban: "512 cm³", gambar: "kubus.png" },
+      { pertanyaan: "Berapakah luas segitiga dengan alas 15 cm dan tinggi 12 cm?", pilihan: ["60 cm²", "90 cm²", "120 cm²", "180 cm²"], jawaban: "90 cm²", gambar: "segitiga.png" },
+      { pertanyaan: "Berapakah luas persegi dengan sisi 10 cm?", pilihan: ["20 cm²", "40 cm²", "80 cm²", "100 cm²"], jawaban: "100 cm²", gambar: "persegi.png" },
+      { pertanyaan: "Berapakah luas persegi panjang 20 cm x 7 cm?", pilihan: ["27 cm²", "54 cm²", "140 cm²", "200 cm²"], jawaban: "140 cm²", gambar: "persegi_panjang.png" },
+      { pertanyaan: "Berapakah luas layang-layang dengan diagonal 18 cm dan 12 cm?", pilihan: ["72 cm²", "108 cm²", "144 cm²", "216 cm²"], jawaban: "108 cm²", gambar: "layang_layang.png" },
+      { pertanyaan: "Volume balok 10 x 4 x 6 cm adalah...", pilihan: ["60 cm³", "120 cm³", "240 cm³", "360 cm³"], jawaban: "240 cm³", gambar: "balok.png" },
+      { pertanyaan: "Luas trapesium dengan sisi sejajar 8 cm dan 12 cm, tinggi 5 cm adalah...", pilihan: ["20 cm²", "30 cm²", "50 cm²", "60 cm²"], jawaban: "50 cm²", gambar: "trapesium.png" },
+      { pertanyaan: "Luas lingkaran dengan jari-jari 7 cm (π ≈ 22/7) adalah...", pilihan: ["44 cm²", "77 cm²", "154 cm²", "308 cm²"], jawaban: "154 cm²", gambar: "lingkaran.png" },
+      { pertanyaan: "Luas jajar genjang dengan alas 14 cm dan tinggi 9 cm adalah...", pilihan: ["23 cm²", "63 cm²", "126 cm²", "140 cm²"], jawaban: "126 cm²", gambar: "jajar_genjang.png" },
+      { pertanyaan: "Volume kerucut dengan jari-jari 5 cm dan tinggi 12 cm (π ≈ 3.14) adalah...", pilihan: ["157 cm³", "235.5 cm³", "314 cm³", "471 cm³"], jawaban: "314 cm³", gambar: "kerucut.png" }
+    ];
+
+    const soalData = semuaSoal.sort(() => 0.5 - Math.random()).slice(0, 10);
+    let indeks = 0;
+    let skor = 0;
+    let rekapJawaban = [];
+
+    function tampilkanSoal() {
+      const soal = soalData[indeks];
+      document.getElementById("soal").innerText = soal.pertanyaan;
+
+      const gambarDiv = document.getElementById("gambar");
+      gambarDiv.innerHTML = soal.gambar ? `<img class="soal-gambar" src="images/${soal.gambar}" alt="gambar">` : "";
+
+      const pilihanDiv = document.getElementById("pilihan");
+      pilihanDiv.innerHTML = "";
+      soal.pilihan.forEach(pil => {
+        const btn = document.createElement("button");
+        btn.innerText = pil;
+        btn.onclick = () => {
+          klikAudio.play();
+          jawab(pil);
+        };
+        pilihanDiv.appendChild(btn);
+      });
+
+      document.getElementById("hasil").innerText = "";
+    }
+
+    function jawab(pilihan) {
+      const benar = soalData[indeks].jawaban;
+      const hasil = document.getElementById("hasil");
+      const soal = soalData[indeks];
+
+      rekapJawaban.push({
+        pertanyaan: soal.pertanyaan,
+        pilihanUser: pilihan,
+        jawabanBenar: soal.jawaban,
+        benar: pilihan === soal.jawaban
+      });
+
+      if (pilihan === soal.jawaban) {
+        skor++;
+        hasil.innerText = "Jawaban benar!";
+        hasil.style.color = "green";
+      } else {
+        hasil.innerText = `Jawaban salah! Jawaban yang benar adalah: ${soal.jawaban}`;
+        hasil.style.color = "red";
+      }
+
+
+      indeks++;
+      setTimeout(() => {
+        if (indeks < soalData.length) {
+          tampilkanSoal();
+        } else {
+          tampilkanSelesai();
+        }
+      }, 1500);
+    }
+
+    function tampilkanSelesai() {
+      document.getElementById("kuis").style.display = "none";
+      document.getElementById("selesai").style.display = "block";
+      let rekapHTML = '<h3 style="margin-top:20px;color:#333;">Rekap Jawaban:</h3><ol>';
+rekapJawaban.forEach((item, index) => {
+  rekapHTML += `<li>
+    <div><strong>${item.pertanyaan}</strong></div>
+    <div>Jawaban kamu: <span class="${item.benar ? 'benar' : 'salah'}">${item.pilihanUser}</span></div>
+    ${item.benar ? '' : `<div>Jawaban benar: <span>${item.jawabanBenar}</span></div>`}
+  </li>`;
+});
+rekapHTML += '</ol>';
+
+
+      document.getElementById("selesai").innerHTML = `
+        <img src="images/piala.png" alt="Piala" style="max-width: 120px; margin-bottom: 20px;">
+        <div style="font-size: 32px; color: #0b6623; margin-bottom: 10px;">Skor Kamu</div>
+        <div style="font-size: 48px; color: #007e33; font-weight: bold;">${skor} / ${soalData.length}</div>
+        ${rekapHTML}
+        <button class="tombol-ulang" onclick="location.reload()"> Ulangi Kuis
+          </button>
+      `;
+
+    }
+
+    window.onload = tampilkanSoal;
+  </script>
+</body>
+</html>
